@@ -1,6 +1,9 @@
 Template.login.helpers({
 	userEmail: function() {
 		return Meteor.user().emails[0].address;
+	},
+	userType: function() {
+		return Meteor.user().profile.usertype;
 	}
 });
 
@@ -21,6 +24,7 @@ Template.login.events({
 		var email = event.target.email.value;
 		var password = event.target.password.value;
 		var password2 = event.target.password2.value;
+		var usertype = event.target.usertype.value;
 
 		if (isNotEmpty(email) && 
 			isNotEmpty(password) && 
@@ -32,7 +36,7 @@ Template.login.events({
 				email: email,
 				password: password,
 				profile: {
-					usertype: 'customer'
+					usertype: usertype
 				}
 			}, function(err) {
 				if(err) {
